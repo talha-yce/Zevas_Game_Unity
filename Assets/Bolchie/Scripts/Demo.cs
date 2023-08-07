@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class Demo : MonoBehaviour
 {
-
+    private float airControl = 0.1f;
     bool canJump = true;
     //variable for how fast player runs//
     private float speed = 5f;
@@ -22,7 +22,7 @@ public class Demo : MonoBehaviour
     public Transform groundCheck;
     float groundRadius = 0.2f;
     public LayerMask whatIsGround;
-
+    private Oyun_Yonetim healt;
     //variable for how high player jumps//
     [SerializeField]
     private float jumpForce = 300f;
@@ -34,6 +34,8 @@ public class Demo : MonoBehaviour
 
     void Start()
     {
+
+        healt = GetComponent<Oyun_Yonetim>();
         GetComponent<Rigidbody2D>().freezeRotation = true;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -43,58 +45,7 @@ public class Demo : MonoBehaviour
     void Update()
     {
         HandleInput();
-    }
-
-    //movement//
-    void FixedUpdate()
-    {
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-        anim.SetBool("Ground", grounded);
-
-        float horizontal = Input.GetAxis("Horizontal");
-        if (!dead && !attack)
-        {
-            anim.SetFloat("vSpeed", rb.velocity.y);
-            anim.SetFloat("Speed", Mathf.Abs(horizontal));
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        }
-        if (horizontal > 0 && !facingRight && !dead && !attack)
-        {
-            Flip(horizontal);
-        }
-
-        else if (horizontal < 0 && facingRight && !dead && !attack)
-        {
-            Flip(horizontal);
-        }
-    }
-
-    //attacking and jumping//
-    private void HandleInput()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftAlt) && !dead)
-        {
-            attack = true;
-            anim.SetBool("Attack", true);
-            anim.SetFloat("Speed", 0);
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftAlt))
-        {
-            attack = false;
-            anim.SetBool("Attack", false);
-        }
-
-        // Zıplama işlemi sadece yerdeyken (grounded == true) gerçekleşecek
-        if (grounded && Input.GetKeyDown(KeyCode.Space) && !dead && canJump)
-        {
-            anim.SetBool("Ground", false);
-            rb.AddForce(new Vector2(0, jumpForce));
-            canJump = false; // Zıpladıktan sonra canJump'ı devre dışı bırak
-        }
-
-        // dead animation for testing//
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (healt.can <= 0)
         {
             if (!dead)
             {
@@ -102,12 +53,78 @@ public class Demo : MonoBehaviour
                 anim.SetFloat("Speed", 0);
                 dead = true;
             }
+
+        }
+        else
+        {
+            anim.SetBool("Dead", false);
+            dead = false;
+        }
+    }
+
+
+    void FixedUpdate()
+    {
+        if (!dead)
+        {
+            grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+            anim.SetBool("Ground", grounded);
+
+            float horizontal = Input.GetAxis("Horizontal");
+            float currentSpeed = speed;
+
+            // Apply air control
+            if (!grounded)
+            {
+                rb.velocity = new Vector2(horizontal * currentSpeed * airControl, rb.velocity.y);
+            }
             else
             {
-                anim.SetBool("Dead", false);
-                dead = false;
+                // Apply regular movement when grounded
+                rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
+            }
+
+            anim.SetFloat("vSpeed", rb.velocity.y);
+            anim.SetFloat("Speed", Mathf.Abs(horizontal));
+
+            if (horizontal > 0 && !facingRight && !dead && !attack)
+            {
+                Flip(horizontal);
+            }
+            else if (horizontal < 0 && facingRight && !dead && !attack)
+            {
+                Flip(horizontal);
             }
         }
+    }
+    //attacking and jumping//
+    private void HandleInput()
+    {
+        if (!dead)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftAlt) && !dead)
+            {
+                attack = true;
+                anim.SetBool("Attack", true);
+                anim.SetFloat("Speed", 0);
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftAlt))
+            {
+                attack = false;
+                anim.SetBool("Attack", false);
+            }
+
+            // Zıplama işlemi sadece yerdeyken (grounded == true) gerçekleşecek
+            if (grounded && Input.GetKeyDown(KeyCode.Space) && !dead && canJump)
+            {
+                anim.SetBool("Ground", false);
+                rb.AddForce(new Vector2(0, jumpForce));
+                canJump = false; // Zıpladıktan sonra canJump'ı devre dışı bırak
+            }
+        }
+        // dead animation for testing//
+
     }
 
 

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Dusman
+  - finish
+  - odul
   layers:
   - Default
   - TransparentFX
