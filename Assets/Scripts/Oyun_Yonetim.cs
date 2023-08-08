@@ -1,37 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
+
 
 public class Oyun_Yonetim : MonoBehaviour
 {
+    public int sonsahne_no;
+    public Button btntekrar;
+    public Button btnyeni;
+    public Canvas canvas1;
+    public TextMeshProUGUI cantext, Baslik;
     private Animator anim;
-    bool dead = false;
-    public int can = 5;
-    // Start is called before the first frame update
+    private bool dead = false;
+    public int can = 3;
+    private bool gameOver = false;
+
     void Start()
     {
-
-
+        sonsahne_no = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("son_sahne_no", sonsahne_no);
+        // Ýlk baþta, "gameOver" deðerini false olarak ayarlayýn.
+        gameOver = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        cantext.text = can.ToString();
+        if (can == 0 && !gameOver)
+        {
+            gameOver = true;
+            StartCoroutine(LoadGameOverSceneAfterDelay(1.5f));
+        }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Dusman"))
         {
-            can--;
-            // Düþman objesiyle etkileþim gerçekleþtiðinde yapýlacak iþlemler burada olacak
+            if (can > 0)
+                can--;
             Debug.Log("Düþmanla etkileþim gerçekleþti!");
         }
-        else if (collision.CompareTag("Reward"))
+        else if (collision.CompareTag("odul"))
         {
-            // Ödül objesiyle etkileþim gerçekleþtiðinde yapýlacak iþlemler burada olacak
+            can++;
+            Destroy(collision.gameObject);
             Debug.Log("Ödülle etkileþim gerçekleþti!");
+        }
+        else if (collision.CompareTag("sinir"))
+        {
+            can = 0;
+            Destroy(collision.gameObject);
+            Debug.Log("Sýnýr etkileþim gerçekleþti!");
+        }
+        else if (collision.CompareTag("finish"))
+        {
+            StartCoroutine(LoadVictorySceneAfterDelay(1f));
         }
     }
 
+    private IEnumerator LoadGameOverSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("Game_Ower");
+    }
+    private IEnumerator LoadVictorySceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("Victory");
+    }
 }
