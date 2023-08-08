@@ -7,6 +7,7 @@ using System.Collections;
 
 public class Oyun_Yonetim : MonoBehaviour
 {
+    
     public int sonsahne_no;
     public Button btntekrar;
     public Button btnyeni;
