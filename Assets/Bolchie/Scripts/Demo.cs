@@ -2,18 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Basic Player Script//
-//controls: 
-//A, D, Left, Right to move
-//Left Alt to attack
-//Space to jump
-//Z is to see dead animation
-
 public class Demo : MonoBehaviour
 {
     private float airControl = 0.1f;
     bool canJump = true;
-    //variable for how fast player runs//
+
     private float speed = 5f;
 
     private bool facingRight = true;
@@ -23,7 +16,7 @@ public class Demo : MonoBehaviour
     float groundRadius = 0.2f;
     public LayerMask whatIsGround;
     private Oyun_Yonetim healt;
-    //variable for how high player jumps//
+
     [SerializeField]
     private float jumpForce = 300f;
 
@@ -73,14 +66,14 @@ public class Demo : MonoBehaviour
             float horizontal = Input.GetAxis("Horizontal");
             float currentSpeed = speed;
 
-            // Apply air control
+
             if (!grounded)
             {
                 rb.velocity = new Vector2(horizontal * currentSpeed * airControl, rb.velocity.y);
             }
             else
             {
-                // Apply regular movement when grounded
+
                 rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
             }
 
@@ -97,7 +90,7 @@ public class Demo : MonoBehaviour
             }
         }
     }
-    //attacking and jumping//
+
     private void HandleInput()
     {
         if (!dead)
@@ -115,15 +108,15 @@ public class Demo : MonoBehaviour
                 anim.SetBool("Attack", false);
             }
 
-            // Zıplama işlemi sadece yerdeyken (grounded == true) gerçekleşecek
+
             if (grounded && Input.GetKeyDown(KeyCode.Space) && !dead && canJump)
             {
                 anim.SetBool("Ground", false);
                 rb.AddForce(new Vector2(0, jumpForce));
-                canJump = false; // Zıpladıktan sonra canJump'ı devre dışı bırak
+                canJump = false;
             }
         }
-        // dead animation for testing//
+
 
     }
 
@@ -137,7 +130,7 @@ public class Demo : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Karakter yerdeyken (grounded) zıplama işlemi gerçekleştikten sonra canJump'ı tekrar etkinleştir
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             canJump = true;

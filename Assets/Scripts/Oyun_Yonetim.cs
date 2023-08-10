@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,12 +6,10 @@ using System.Collections;
 
 public class Oyun_Yonetim : MonoBehaviour
 {
-    
+
     public int sonsahne_no;
-    public Button btntekrar;
-    public Button btnyeni;
-    public Canvas canvas1;
-    public TextMeshProUGUI cantext, Baslik;
+
+    
     private Animator anim;
     private bool dead = false;
     public int can = 3;
@@ -20,19 +17,24 @@ public class Oyun_Yonetim : MonoBehaviour
 
     void Start()
     {
+        
         sonsahne_no = SceneManager.GetActiveScene().buildIndex;
         PlayerPrefs.SetInt("son_sahne_no", sonsahne_no);
         // Ýlk baþta, "gameOver" deðerini false olarak ayarlayýn.
         gameOver = false;
+
     }
 
     void Update()
     {
-        cantext.text = can.ToString();
+
+       
+
+
         if (can == 0 && !gameOver)
         {
             gameOver = true;
-            StartCoroutine(LoadGameOverSceneAfterDelay(1.5f));
+            StartCoroutine(LoadGameOverSceneAfterDelay(1f));
         }
     }
 
@@ -58,7 +60,7 @@ public class Oyun_Yonetim : MonoBehaviour
         }
         else if (collision.CompareTag("finish"))
         {
-            StartCoroutine(LoadVictorySceneAfterDelay(1f));
+            StartCoroutine(LoadVictorySceneAfterDelay(0.5f));
         }
     }
 
@@ -72,4 +74,5 @@ public class Oyun_Yonetim : MonoBehaviour
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("Victory");
     }
+
 }

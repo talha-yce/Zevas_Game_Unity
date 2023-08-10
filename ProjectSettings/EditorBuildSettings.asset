@@ -16,14 +16,14 @@ EditorBuildSettings:
     guid: 5213743e4587faa488f1c2753f814ea0
   - enabled: 1
     path: Assets/Scenes/Sahne 3.unity
-    guid: 69acc213c2cf819409a9b37519a05e7c
-  - enabled: 1
+    guid: 4e6e9dc0fbc20684caa3058facde05f9
+  - enabled: 0
     path: Assets/Scenes/Sahne 4.unity
     guid: 509d7bb381d8dcd4798dc6529e727776
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sahne 5.unity
     guid: ae4e090589ec20847b74947aa7458eb4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sahne 6.unity
     guid: 4f39af4d2a4c8664d8f6194fbf693c63
   - enabled: 1
@@ -42,3 +42,4 @@ EditorBuildSettings:
     path: Assets/Scenes/Victory.unity
     guid: bd132bdafeec03f45abed4a56219a9ea
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

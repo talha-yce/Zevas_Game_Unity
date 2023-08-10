@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 61027570589253092}
   - component: {fileID: 58962551605444100}
   - component: {fileID: 114393563242933454}
+  - component: {fileID: 1024315648636699913}
   m_Layer: 8
   m_Name: Bolchie - Basic 1
   m_TagString: Player
@@ -235,6 +236,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   jumpForce: 600
+--- !u!114 &1024315648636699913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719432917000318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4894d29720401c7418db2601f2818471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sonsahne_no: 0
+  cantext: {fileID: 0}
+  can: 3
 --- !u!1 &1930425855821430
 GameObject:
   m_ObjectHideFlags: 0
