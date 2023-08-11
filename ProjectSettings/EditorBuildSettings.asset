@@ -17,29 +17,35 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sahne 3.unity
     guid: 4e6e9dc0fbc20684caa3058facde05f9
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Sahne 4.unity
-    guid: 509d7bb381d8dcd4798dc6529e727776
-  - enabled: 0
+    guid: 8b256f721f294f44593686f4fe8af390
+  - enabled: 1
     path: Assets/Scenes/Sahne 5.unity
-    guid: ae4e090589ec20847b74947aa7458eb4
+    guid: fe3f9b419402bb547a14d152183cf0da
   - enabled: 0
     path: Assets/Scenes/Sahne 6.unity
     guid: 4f39af4d2a4c8664d8f6194fbf693c63
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sahne 7.unity
     guid: f287f0155a276fb4daec24210b6ceb3a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sahne 8.unity
     guid: 881e1896f4bf0d349867c61a86a0a148
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sahne 9.unity
     guid: 67056f8c03feb9e47838644fe85b1768
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sahne 10.unity
     guid: de6a3852c050a114db0169f2c12e6021
   - enabled: 1
     path: Assets/Scenes/Victory.unity
     guid: bd132bdafeec03f45abed4a56219a9ea
+  - enabled: 1
+    path: Assets/Scenes/Giris.unity
+    guid: dad8e6bfffb918747957285f510cda50
+  - enabled: 1
+    path: Assets/Scenes/Bilgiler.unity
+    guid: d238d5a53bba36b488f66e6f534799c0
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
